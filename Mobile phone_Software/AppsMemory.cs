@@ -8,5 +8,6 @@ namespace Mobile_phone_Software
 {
     internal class AppsMemory
     {
+       
     }
 }

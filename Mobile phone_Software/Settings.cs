@@ -15,9 +15,22 @@ namespace Mobile_phone_Software
         {
             this.memory = memory;
         }
-        public void ChangeVisualizatiion(ConsoleColor color)
+        public ConsoleColor ChangeTheme(ConsoleColor colorBackground, ConsoleColor colorForeground)
         {
-            Console.BackgroundColor = color;
+            Console.BackgroundColor = colorBackground;
+            Console.ForegroundColor = colorForeground;
+            return colorBackground;
+        }
+        public string UpdateSoftware(Software software) 
+        {
+            if(software.versionSoftware < 2.0d && software.sizeSoftware + 200d < memory.maximumSizeMemory)
+            {
+                software.versionSoftware += 0.1d;
+                software.sizeSoftware += 200;
+                memory.memoryStatus += 200;
+                return string.Format("Updated on version: {0}",software.versionSoftware);
+            }
+            return string.Format("Not enough space in memory for update");
         }
         public string StatusMemory() => memory.StatusMemory();
 

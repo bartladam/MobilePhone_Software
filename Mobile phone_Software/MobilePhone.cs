@@ -9,21 +9,23 @@ namespace Mobile_phone_Software
     internal class MobilePhone
     {
         private long serialNumber { get; set; }
-        private string phoneName { get; set; }
+        public string phoneName { get; set; }
         private Random randomSerialNumber { get; set; }
-        private Memory memory { get; set; }
+        public Memory memory { get; set; }
+        public int telephoneNumber { get; private set; }
 
-        public MobilePhone(string phoneName, Memory memory)
+        public MobilePhone(string phoneName, Memory memory, int telephoneNumber)
         {
             this.phoneName = phoneName;
             randomSerialNumber = new Random();
             serialNumber = randomSerialNumber.Next();
             this.memory = memory;
+            this.telephoneNumber = telephoneNumber;
             OpenSoftware();
         }
-        public void OpenSoftware()
+        private void OpenSoftware()
         {
-            // memory select software 
+            memory.software.ShowInterface(memory);
         }
         public override string ToString()
         {
