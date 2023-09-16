@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mobile_phone_Software
 {
-    internal class SMS
+    internal class SMS:Telephone
     {
     }
 }
