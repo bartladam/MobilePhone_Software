@@ -19,7 +19,7 @@ namespace Mobile_phone_Software
             application.Add(new Settings(this));
             application.Add(new GooglePlay(this));
             application.Add(new Telephone());
-            application.Add(new SMS());
+            application.Add(new SMS((Telephone)application[2])); // repair
             this.software = software;
             this.maximumSizeMemory = sizeMemory;
             memoryStatus += software.sizeSoftware; // add new settings size, google play etc
@@ -35,13 +35,12 @@ namespace Mobile_phone_Software
         public void RemoveApp(Application application)
         {
             this.application.Remove(application);
+            memoryStatus -= application.sizeApp;
         }
         public List<object> AppsInMemory() => application;
-        public string StatusMemory()
-        {
-
-            return string.Format("\nMemory is filled up:\n{0}/{1} ({2}%)", memoryStatus, sizeMemory,Math.Round((memoryStatus / sizeMemory) *100));
-        }
+        public string StatusMemory() => string.Format("\nMemory is filled up:\n{0}/{1} ({2}%)", memoryStatus, sizeMemory, Math.Round((memoryStatus / sizeMemory) *100));
+      
+        
 
     }
 }

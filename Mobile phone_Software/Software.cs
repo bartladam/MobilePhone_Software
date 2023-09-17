@@ -42,29 +42,63 @@ namespace Mobile_phone_Software
 3 - add contact
 4 - remove contact");
                         char telephoneChoice = Console.ReadKey().KeyChar;
-                        switch(telephoneChoice)
+                        string nameContact;
+                        switch (telephoneChoice)
                         {
                             case '1':
-                                Console.Write("Write telephone number: ");
-                                telephone.Call(int.Parse(Console.ReadLine()));
+                                Console.Clear();
+                                Console.WriteLine("Your contacts:\n");
+                                Console.WriteLine(telephone.ListContacts());
+                                Console.Write("Call to [name]: ");
+                                Console.WriteLine(telephone.Call(Console.ReadLine(),false, null)); 
                                 break;
                             case '2':
-                                Console.WriteLine(telephone.ListContacts());              
+                                Console.Clear();
+                                Console.WriteLine(telephone.ListContacts());
                                 break;
                             case '3':
-
+                                Console.Clear();
+                                Console.WriteLine("Write name contact: ");
+                                nameContact = Console.ReadLine();
+                                Console.WriteLine("Write number your new contact");
+                                int number = int.Parse(Console.ReadLine());
+                                Console.WriteLine(telephone.AddContact(nameContact, number)); 
                                 break;
                             case '4':
+                                Console.Clear();
+                                Console.WriteLine("Name contact what do you want remove: ");
+                                nameContact = Console.ReadLine();
+                                Console.WriteLine(telephone.RemoveContact(nameContact));
                                 break;
 
 
                         }
+                        Console.WriteLine("\nPress any key to back on main page");
+                        Console.ReadKey();
                         break;
                     
                     case '2':
                         Console.Clear();
                         Console.WriteLine("SMS:");
                         SMS sms = (SMS)AppsInMemory(2);
+                        Console.WriteLine(@"
+1 - SEND SMS");
+                        choice = Console.ReadKey().KeyChar;
+                        switch (choice)
+                        {
+                            case '1':
+                                Console.Clear();
+                                sms.ImportContact();
+                                Console.WriteLine("Your contacts:\n");
+                                Console.WriteLine(sms.ListContacts());
+                                Console.Write("Send SMS to [name]: ");
+                                nameContact = Console.ReadLine();
+                                Console.Write("Text to send: ");
+                                Console.WriteLine(sms.Call(nameContact,true,Console.ReadLine()));
+                                break;
+                                
+                        }
+                        Console.ReadKey();
                         break;
                     case '3':
                         Console.Clear();
@@ -100,6 +134,7 @@ namespace Mobile_phone_Software
                         break;
                     case '4':
                         GooglePlay googlePlay = (GooglePlay)AppsInMemory(4);
+
                         break;
 
 

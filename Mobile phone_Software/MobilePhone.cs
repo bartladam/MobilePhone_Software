@@ -21,9 +21,9 @@ namespace Mobile_phone_Software
             serialNumber = randomSerialNumber.Next();
             this.memory = memory;
             this.telephoneNumber = telephoneNumber;
-            OpenSoftware();
+            //OpenSoftware();
         }
-        private void OpenSoftware()
+        public void OpenSoftware()
         {
             memory.software.ShowInterface(memory);
         }

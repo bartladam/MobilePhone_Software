@@ -9,7 +9,7 @@ namespace Mobile_phone_Software
     internal class Application
     {
         public string nameApp{ get; private set; }
-        public enum typeOfApp { game, social, information, investment}
+        public enum typeOfApp { game, social, information, investment, music}
         public typeOfApp type { get; private set; }
         public int sizeApp { get; set; }
         public Application(string nameApp, typeOfApp type)

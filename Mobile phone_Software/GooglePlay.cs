@@ -8,13 +8,15 @@ namespace Mobile_phone_Software
 {
     internal class GooglePlay
     {
-        public string Name { get; private set; } = "Google Play";
         private Memory memory { get; set; }
         public int sizeGooglePlay { get; set; } = 250;
         public List<Application> apps { get; set; }
         public GooglePlay(Memory memory)
         {
             apps = new List<Application>();
+            apps.Add(new Application("Spotify", Application.typeOfApp.music) { sizeApp = 40 });
+            apps.Add(new Application("eToro", Application.typeOfApp.investment) { sizeApp = 100 });
+            apps.Add(new Application("Clash of Clans", Application.typeOfApp.game) { sizeApp = 150 });
             this.memory = memory;
         }
         public string ShowAppsInStore()
