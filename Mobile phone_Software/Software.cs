@@ -6,12 +6,27 @@ using System.Threading.Tasks;
 
 namespace Mobile_phone_Software
 {
+    /// <summary>
+    /// Via software we work with device
+    /// </summary>
     internal class Software
     {
+        /// <summary>
+        /// We can update software. Current version we save here
+        /// </summary>
         public double versionSoftware { get; set; } = 1.0d;
+        /// <summary>
+        /// Each software is saved in memory and take some size memory
+        /// </summary>
         public int sizeSoftware { get; set; } = 1000;
+        /// <summary>
+        /// Software must have access to memory.
+        /// </summary>
         private Memory memory { get; set; }
-
+        /// <summary>
+        /// Interface for user who is owned mobile phone
+        /// </summary>
+        /// <param name="memory"></param>
         public void ShowInterface(Memory memory)
         {
             this.memory = memory;
@@ -21,7 +36,7 @@ namespace Mobile_phone_Software
             {
 
                 Console.Clear();
-                Console.WriteLine("Hello...\nv.{0}", versionSoftware);
+                Console.WriteLine("Hello...\nv.{0}", Math.Round(versionSoftware, 1));
                 Console.Write(@"
 1 - Telephone
 2 - SMS
@@ -41,6 +56,7 @@ namespace Mobile_phone_Software
 2 - Contacts
 3 - Add contact
 4 - Remove contact");
+                        Console.Write("Your choice: ");
                         char telephoneChoice = Console.ReadKey().KeyChar;
                         string nameContact;
                         switch (telephoneChoice)
@@ -50,7 +66,7 @@ namespace Mobile_phone_Software
                                 Console.WriteLine("Your contacts:\n");
                                 Console.WriteLine(telephone.ListContacts());
                                 Console.Write("Call to [name]: ");
-                                Console.WriteLine(telephone.Call(Console.ReadLine(),false, null)); 
+                                Console.WriteLine(telephone.Communication(Console.ReadLine(),false, null)); 
                                 break;
                             case '2':
                                 Console.Clear();
@@ -88,6 +104,7 @@ namespace Mobile_phone_Software
 3 - Add contact
 4 - Remove contact");
                         sms.ImportContact();
+                        Console.Write("Your choice: ");
                         choice = Console.ReadKey().KeyChar;
                         switch (choice)
                         {
@@ -98,7 +115,7 @@ namespace Mobile_phone_Software
                                 Console.Write("Send SMS to [name]: ");
                                 nameContact = Console.ReadLine();
                                 Console.Write("Text to send: ");
-                                Console.WriteLine(sms.Call(nameContact,true,Console.ReadLine()));
+                                Console.WriteLine(sms.Communication(nameContact,true,Console.ReadLine()));
                                 break;
                             case '2':
                                 Console.Clear();
@@ -133,6 +150,7 @@ namespace Mobile_phone_Software
 1 - Change theme (black/white)
 2 - StatusMemory
 3 - Update software");
+                        Console.Write("Your choice: ");
                         choice = Console.ReadKey().KeyChar;
                         switch(choice)
                         {
@@ -160,12 +178,13 @@ namespace Mobile_phone_Software
                     case '4':
                         Console.Clear();
                         string selectedApp;
-                        Console.WriteLine("Google play:");
+                        Console.WriteLine("Google play:\n");
                         GooglePlay googlePlay = (GooglePlay)AppsInMemory(4);
                         Console.WriteLine(googlePlay.ShowAppsInStore());
                         Console.WriteLine(@"
 1 - Download app
 2 - Remove app");
+                        Console.Write("Your choice: ");
                         choice = Console.ReadKey().KeyChar;
                         switch (choice)
                         {
@@ -178,8 +197,7 @@ namespace Mobile_phone_Software
                                 {
                                     if (item.nameApp.Equals(selectedApp))
                                     {
-                                        googlePlay.DownloadApp(item);
-                                        Console.WriteLine("You downloaded app: {0}", selectedApp);
+                                        Console.WriteLine(googlePlay.DownloadApp(item)); 
                                     }
                                 }
                                 break;
@@ -192,8 +210,8 @@ namespace Mobile_phone_Software
                                 {
                                     if(item is Application && ((Application)item).nameApp.Equals(selectedApp))
                                     {
-                                        googlePlay.UninstallApp(((Application)item));
-                                        Console.WriteLine("App uinstalled");
+                                        Console.WriteLine(googlePlay.UninstallApp(((Application)item))); 
+
                                         break;
                                     }
                                 }
@@ -224,7 +242,11 @@ namespace Mobile_phone_Software
                 }
             }
         }
-
+        /// <summary>
+        /// It find required application in memory. Needed for start required application
+        /// </summary>
+        /// <param name="findObject"></param>
+        /// <returns></returns>
         public object AppsInMemory(int findObject)
         {
             object founded = null;
