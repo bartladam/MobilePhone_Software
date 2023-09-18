@@ -42,7 +42,7 @@ namespace Mobile_phone_Software
                         {
                             if(apps is Telephone && SMS is false)
                             {
-                                return ((Telephone)apps).RecieveCall(55844); // repair number telephone
+                                return ((Telephone)apps).RecieveCall(304756123); // repair number telephone
                             }
                             else if(apps is SMS && SMS)
                             {

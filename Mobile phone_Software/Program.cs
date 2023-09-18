@@ -3,6 +3,6 @@ using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
 Console.Title = "Mobile phone";
-MobilePhone m = new MobilePhone("AdamB", new Memory(new Software()), 75887);
+MobilePhone m = new MobilePhone("AdamB", new Memory(new Software()), 304756123);
 m.OpenSoftware();
 
