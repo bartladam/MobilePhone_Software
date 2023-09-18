@@ -37,10 +37,10 @@ namespace Mobile_phone_Software
                         Console.WriteLine("Telephone:");
                         Telephone telephone = (Telephone)AppsInMemory(1);
                         Console.WriteLine(@"
-1 - call
-2 - contacts
-3 - add contact
-4 - remove contact");
+1 - Call
+2 - Contacts
+3 - Add contact
+4 - Remove contact");
                         char telephoneChoice = Console.ReadKey().KeyChar;
                         string nameContact;
                         switch (telephoneChoice)
@@ -66,6 +66,7 @@ namespace Mobile_phone_Software
                                 break;
                             case '4':
                                 Console.Clear();
+                                Console.WriteLine(telephone.ListContacts());
                                 Console.WriteLine("Name contact what do you want remove: ");
                                 nameContact = Console.ReadLine();
                                 Console.WriteLine(telephone.RemoveContact(nameContact));
@@ -82,13 +83,16 @@ namespace Mobile_phone_Software
                         Console.WriteLine("SMS:");
                         SMS sms = (SMS)AppsInMemory(2);
                         Console.WriteLine(@"
-1 - SEND SMS");
+1 - Send sms
+2 - Contacts
+3 - Add contact
+4 - Remove contact");
+                        sms.ImportContact();
                         choice = Console.ReadKey().KeyChar;
                         switch (choice)
                         {
                             case '1':
                                 Console.Clear();
-                                sms.ImportContact();
                                 Console.WriteLine("Your contacts:\n");
                                 Console.WriteLine(sms.ListContacts());
                                 Console.Write("Send SMS to [name]: ");
@@ -96,10 +100,31 @@ namespace Mobile_phone_Software
                                 Console.Write("Text to send: ");
                                 Console.WriteLine(sms.Call(nameContact,true,Console.ReadLine()));
                                 break;
-                                
+                            case '2':
+                                Console.Clear();
+                                Console.WriteLine(sms.ListContacts());
+                                break;
+                            case '3':
+                                Console.Clear();
+                                Console.WriteLine("Write name contact: ");
+                                nameContact = Console.ReadLine();
+                                Console.WriteLine("Write number your new contact");
+                                int number = int.Parse(Console.ReadLine());
+                                Console.WriteLine(sms.AddContact(nameContact, number));
+                                break;
+                            case '4':
+                                Console.Clear();
+                                Console.WriteLine(sms.ListContacts());
+                                Console.WriteLine("Name contact what do you want remove: ");
+                                nameContact = Console.ReadLine();
+                                Console.WriteLine(sms.RemoveContact(nameContact));
+                                break;
+
                         }
+                        Console.WriteLine("\nPress any key to back on main page");
                         Console.ReadKey();
                         break;
+
                     case '3':
                         Console.Clear();
                         Console.WriteLine("Settings:");
@@ -133,8 +158,66 @@ namespace Mobile_phone_Software
                         }
                         break;
                     case '4':
+                        Console.Clear();
+                        string selectedApp;
+                        Console.WriteLine("Google play:");
                         GooglePlay googlePlay = (GooglePlay)AppsInMemory(4);
-
+                        Console.WriteLine(googlePlay.ShowAppsInStore());
+                        Console.WriteLine(@"
+1 - Download app
+2 - Remove app");
+                        choice = Console.ReadKey().KeyChar;
+                        switch (choice)
+                        {
+                            case '1':
+                                Console.Clear();
+                                Console.WriteLine(googlePlay.ShowAppsInStore());
+                                Console.WriteLine("Which app: ");
+                                selectedApp = Console.ReadLine();
+                                foreach (Application item in googlePlay.apps)
+                                {
+                                    if (item.nameApp.Equals(selectedApp))
+                                    {
+                                        googlePlay.DownloadApp(item);
+                                        Console.WriteLine("You downloaded app: {0}", selectedApp);
+                                    }
+                                }
+                                break;
+                            case '2':
+                                Console.Clear();
+                                Console.WriteLine(googlePlay.ShowAppsInStore());
+                                Console.WriteLine("Which app: ");
+                                selectedApp = Console.ReadLine();
+                                foreach (object item in memory.AppsInMemory())
+                                {
+                                    if(item is Application && ((Application)item).nameApp.Equals(selectedApp))
+                                    {
+                                        googlePlay.UninstallApp(((Application)item));
+                                        Console.WriteLine("App uinstalled");
+                                        break;
+                                    }
+                                }
+                                break;
+                      
+                        }
+                        Console.WriteLine("\nPress any key to back on main page");
+                        Console.ReadKey();
+                        break;
+                    case '5':
+                        Console.Clear();
+                        Console.WriteLine("Downloaded apps");
+                        int count = 0;
+                        foreach (object item in memory.AppsInMemory())
+                        {
+                            if (item is Application)
+                            {
+                                count++;
+                                Console.WriteLine("{0}. {1}",count,((Application)item).nameApp);
+                            }
+                        }
+                     
+                        Console.WriteLine("\nPress any key to back on main page");
+                        Console.ReadKey();
                         break;
 
 

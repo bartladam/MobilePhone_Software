@@ -24,7 +24,7 @@ namespace Mobile_phone_Software
             string nameApps = "";
             foreach (Application item in apps)
             {
-                nameApps += string.Format("NAME: {0}\n Type application: {1}", item.nameApp, item.type);
+                nameApps += string.Format("NAME: {0} | Type application: {1}\n------\n", item.nameApp, item.type.ToString());
             }
             return nameApps;
         }

@@ -47,7 +47,7 @@ namespace Mobile_phone_Software
         {
             return string.Format("Incoming call from number: {0}", telephoneNumber);
         }
-        public string AddContact(string nameContact, int telephoneNumber)
+        public virtual string AddContact(string nameContact, int telephoneNumber)
         {
             if(nameContact is not null && telephoneNumber.ToString().Length >= 9)
             {
@@ -56,7 +56,7 @@ namespace Mobile_phone_Software
             }
             return string.Format("Contact name has zero chars or telephone number is less than 6 numbers");
         }
-        public string RemoveContact(string nameContact)
+        public virtual string RemoveContact(string nameContact)
         {
             foreach (MobilePhone item in contacts)
             {

@@ -20,6 +20,14 @@ namespace Mobile_phone_Software
         {
             contacts = telephone.contacts;
         }
+        public override string AddContact(string nameContact, int telephoneNumber)
+        {
+            return telephone.AddContact(nameContact, telephoneNumber);
+        }
+        public override string RemoveContact(string nameContact)
+        {
+            return telephone.RemoveContact(nameContact);
+        }
         public string RecieveSMS(string text)
         {
             textSMS.Add(text);
